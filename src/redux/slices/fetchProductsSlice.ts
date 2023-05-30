@@ -2,11 +2,9 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import axios from "axios";
 
-const API_URL = "https://dummyjson.com/products";
-
 export const fetchProducts = createAsyncThunk(
 	"products/productsSlice",
-	async () => {
+	async (API_URL: string) => {
 		try {
 			const { data } = await axios.get(API_URL);
 			return data.products;
@@ -18,11 +16,13 @@ export const fetchProducts = createAsyncThunk(
 
 export const productsSlice = createSlice({
 	name: "products",
-	initialState: {},
+	initialState: {
+		products: [],
+	},
 	reducers: {},
 	extraReducers: builder => {
 		builder.addCase(fetchProducts.fulfilled, (state, action) => {
-			return (state = action.payload);
+			state.products = action.payload;
 		});
 	},
 });

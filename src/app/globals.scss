@@ -4,7 +4,7 @@
 
 @layer base {
 	body {
-		@apply w-screen h-screen bg-white;
+		@apply min-h-screen bg-white font-sans;
 	}
 	h1,
 	h2,
@@ -22,7 +22,7 @@
 	.navLink {
 		@apply w-full h-full hover:text-gray-500 transition;
 		&.active {
-			@apply relative text-red-500 before:absolute before:w-full before:h-[2px] before:bg-red-500 before:bottom-0;
+			@apply relative text-gray-900 before:absolute before:w-full before:h-[2px] before:bg-gray-900 before:bottom-0;
 		}
 	}
 	.main-btn {
@@ -35,13 +35,13 @@
 		@apply bg-gray-200 border border-gray-300;
 	}
 	.category-btn {
-		@apply hover:text-red-500 capitalize transition cursor-pointer;
+		@apply hover:text-gray-900 font-medium capitalize transition cursor-pointer;
 		&.active {
-			@apply text-red-500;
+			@apply text-gray-900;
 		}
 	}
 	.card {
-		@apply w-[300px] bg-white p-2 border shadow-md;
+		@apply w-[300px] bg-white p-2 border shadow-sm;
 		.product-image {
 			@apply w-[300px] h-[200px] object-cover rounded-xl;
 		}

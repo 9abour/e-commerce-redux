@@ -42,10 +42,10 @@ const Banner = () => {
 			<div className="container flex flex-col-reverse lg:flex-row items-center gap-4 p-4">
 				<div className="w-full lg:w-2/4">
 					<h1 className="text-4xl font-semibold">{product.title}</h1>
-					<p className="text-gray-500 font-light">{product.description}</p>
+					<p className="text-gray-500">{product.description}</p>
 					<Link
 						href={`product/${product.id}`}
-						className="btn btn-outline btn-error border-red-500 rounded-md mt-4 h-2 !min-h-[30px] !text-gray-900"
+						className="btn-outline btn border-gray-900 rounded-md mt-4 h-2 !min-h-[30px] !text-gray-900"
 					>
 						Details
 					</Link>
