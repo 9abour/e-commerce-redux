@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	body {
+		@apply w-screen h-screen bg-white;
+	}
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	p,
+	span {
+		@apply text-gray-900;
+	}
+}
+
+@layer utilities {
+	.navLink {
+		@apply w-full h-full hover:text-gray-500 transition;
+		&.active {
+			@apply relative text-red-500 before:absolute before:w-full before:h-[2px] before:bg-red-500 before:bottom-0;
+		}
+	}
+	.main-btn {
+		@apply p-2 rounded-md bg-transparent hover:bg-gray-100 transition;
+	}
+	.container {
+		@apply mx-auto;
+	}
+	.arrow-btn {
+		@apply bg-gray-200 border border-gray-300;
+	}
+	.category-btn {
+		@apply hover:text-red-500 capitalize transition cursor-pointer;
+		&.active {
+			@apply text-red-500;
+		}
+	}
+	.card {
+		@apply w-[300px] bg-white p-2 border shadow-md;
+		.product-image {
+			@apply w-[300px] h-[200px] object-cover rounded-xl;
+		}
+		.title {
+			@apply text-2xl font-semibold line-clamp-1 my-4;
+		}
+		.description {
+			@apply text-gray-500 max-w-[200px] min-h-[72px] line-clamp-3;
+		}
+		.btn {
+			@apply mt-4 rounded-full;
+		}
+	}
+}
