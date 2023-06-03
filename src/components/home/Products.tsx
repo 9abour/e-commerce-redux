@@ -6,8 +6,9 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { productType } from "../../../types";
 import Link from "next/link";
-
-const API_URL = "https://dummyjson.com/products";
+import { MdAddCircleOutline, MdCheckCircleOutline } from "react-icons/md";
+import { API_URL } from "../../../constants";
+import { addToCart } from "@/redux/slices/cartSlice";
 
 const Products = () => {
 	const categories = ["all", "tops", "smartphones", "laptops"];
@@ -23,6 +24,8 @@ const Products = () => {
 			dispatch(fetchProducts(`${API_URL}/category/${category}`));
 		}
 	}, [category]);
+
+	useEffect(() => {}, []);
 
 	return (
 		<div className="container mt-8">
@@ -45,19 +48,30 @@ const Products = () => {
 				{products.length != 0 ? (
 					products.map((item: productType) => (
 						<div key={item.id} className="card">
-							<Image
-								src={item.thumbnail}
-								width={300}
-								height={300}
-								alt={item.title}
-								priority
-								className="product-image"
-							/>
-							<h3 className="title">{item.title}</h3>
-							<p className="description">{item.description}</p>
-							<Link href={`products/product/${item.id}`} className="btn">
-								Details
+							<Link href={`products/product/${item.id}`}>
+								<Image
+									src={item.thumbnail}
+									width={300}
+									height={300}
+									alt={item.title}
+									loading="lazy"
+									className="product-image"
+								/>
 							</Link>
+							<div className="flex justify-between items-center">
+								<h3 className="title">{item.title}</h3>
+								<span className="price">{item.price}$</span>
+							</div>
+							<p className="description">{item.description}</p>
+							<button
+								onClick={() => {
+									dispatch(addToCart(item));
+								}}
+								className="btn cart"
+							>
+								<MdAddCircleOutline size={20} />
+								Cart
+							</button>
 						</div>
 					))
 				) : (

@@ -1,15 +1,11 @@
 "use client";
 
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { fetchCategoryProducts } from "@/redux/slices/fetchCategoryProducts";
-import { fetchProducts } from "@/redux/slices/fetchProductsSlice";
-import searchSlice, { searchState } from "@/redux/slices/searchSlice";
-import { useEffect } from "react";
+import Products from "@/components/home/Products";
 
 const page = () => {
 	return (
 		<div>
-			<h1>Hello</h1>
+			<Products />
 		</div>
 	);
 };
