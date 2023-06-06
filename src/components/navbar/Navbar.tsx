@@ -16,7 +16,7 @@ const Navbar = () => {
 		<nav className="navbar text-gray-900 bg-white flex-col">
 			<Link
 				href="/"
-				className="gap-1 btn btn-ghost !h-2 min-h-8 px-2 rounded-md mb-3"
+				className="gap-1 flex items-center !h-8 min-h-8 px-2 hover:bg-gray-100 rounded-md"
 			>
 				<SiHomeassistantcommunitystore size={20} />
 				<h3 className="text-xl font-semibold uppercase">Store</h3>
@@ -36,7 +36,6 @@ const Navbar = () => {
 				<ul className="flex justify-center items-center gap-4">
 					<NavLink link="products" />
 					<NavLink link="categories" />
-					<NavLink link="random" />
 				</ul>
 				<Link href="/cart" className="main-btn">
 					<BsCart />

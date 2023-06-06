@@ -8,7 +8,8 @@ import { productType } from "../../../types";
 import Link from "next/link";
 import { MdAddCircleOutline, MdCheckCircleOutline } from "react-icons/md";
 import { API_URL } from "../../../constants";
-import { addToCart } from "@/redux/slices/cartSlice";
+import { addToCart, setCartProductsToLS } from "@/redux/slices/cartSlice";
+import Loading from "../Loading";
 
 const Products = () => {
 	const categories = ["all", "tops", "smartphones", "laptops"];
@@ -16,6 +17,7 @@ const Products = () => {
 	const [category, setCategory] = useState("all");
 	const dispatch = useAppDispatch();
 	const products = useAppSelector(state => state.productsSlice.products);
+	const cartProducts = useAppSelector(state => state.cartSlice.products);
 
 	useEffect(() => {
 		if (category == "all") {
@@ -25,7 +27,7 @@ const Products = () => {
 		}
 	}, [category]);
 
-	useEffect(() => {}, []);
+	console.log(cartProducts);
 
 	return (
 		<div className="container mt-8">
@@ -48,7 +50,7 @@ const Products = () => {
 				{products.length != 0 ? (
 					products.map((item: productType) => (
 						<div key={item.id} className="card">
-							<Link href={`products/product/${item.id}`}>
+							<Link href={`products/${item.id}`}>
 								<Image
 									src={item.thumbnail}
 									width={300}
@@ -66,6 +68,7 @@ const Products = () => {
 							<button
 								onClick={() => {
 									dispatch(addToCart(item));
+									dispatch(setCartProductsToLS());
 								}}
 								className="btn cart"
 							>
@@ -75,9 +78,7 @@ const Products = () => {
 						</div>
 					))
 				) : (
-					<button className="btn loading bg-transparent border-none">
-						loading...
-					</button>
+					<Loading />
 				)}
 			</div>
 		</div>
