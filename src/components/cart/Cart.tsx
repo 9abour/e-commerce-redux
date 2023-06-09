@@ -13,6 +13,7 @@ import React, { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { IoMdAddCircle, IoMdRemoveCircle } from "react-icons/io";
 import Loading from "../Loading";
+import Link from "next/link";
 
 const Cart = () => {
 	const cartProducts = useAppSelector(state => state.cartSlice.products);
@@ -38,6 +39,28 @@ const Cart = () => {
 	useEffect(() => {
 		dispatch(setCartProductsToLS());
 	}, [cartProducts]);
+
+	const getCartTotal = (): number => {
+		let total = 0;
+
+		cartProducts.map(item => (total += item.count * item.product.price));
+		console.log(cartProducts);
+
+		return Number(total.toFixed(0));
+	};
+	const getDiscountPercentage = (): number => {
+		let total = 0;
+
+		cartProducts.map(
+			item =>
+				(total +=
+					item.count *
+					(item.product.discountPercentage / 100) *
+					item.product.price)
+		);
+
+		return Number(total.toFixed(0));
+	};
 
 	return (
 		<div className="mt-8">
@@ -84,9 +107,12 @@ const Cart = () => {
 														</div>
 													</div>
 													<div>
-														<div className="font-bold w-full text-xs">
+														<Link
+															href={`/products/${item.product.id}`}
+															className="font-bold w-full text-xs"
+														>
 															{item.product.title}
-														</div>
+														</Link>
 														<div className="text-sm opacity-50">
 															{item.product.brand}
 														</div>
@@ -100,7 +126,7 @@ const Cart = () => {
 													Apple
 												</span>
 											</td>
-											<td>{item.count * item.product.price}$</td>
+											<td>{item.product.price}$</td>
 											<th>
 												<button
 													onClick={() =>
@@ -131,6 +157,22 @@ const Cart = () => {
 									))}
 								</tbody>
 							</table>
+						</div>
+						<div className="mt-2 mx-4 max-w-[300px]">
+							<div className="p-4 [&>div]:flex [&>div]:items-center [&>div]:gap-2 [&>div>h3]:!text-gray-300 [&>div>h3]:uppercase [&>div>span]:text-white [&>div>h3]:font-semibold [&>div>span]:font-semibold bg-[#2a303c] rounded-lg">
+								<div>
+									<h3>Count:</h3>
+									<span>{cartProducts.length}</span>
+								</div>
+								<div>
+									<h3>Discount:</h3>
+									<span>{getDiscountPercentage()}$</span>
+								</div>
+								<div className="mt-4">
+									<h3 className="text-xl">Total:</h3>
+									<span className="text-xl">{getCartTotal()}$</span>
+								</div>
+							</div>
 						</div>
 					</>
 				) : (

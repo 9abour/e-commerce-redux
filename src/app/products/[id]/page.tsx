@@ -68,8 +68,8 @@ const page = () => {
 								<p className="text-gray-500 my-4">{product.description}</p>
 								<span className="text-xl font-semibold">
 									{(
-										((100 - product.discountPercentage) / 100) *
-										product.price
+										product.price -
+										(product.discountPercentage / 100) * product.price
 									).toFixed(2)}
 									$
 								</span>

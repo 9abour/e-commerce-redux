@@ -22,17 +22,15 @@ const Navbar = () => {
 				<h3 className="text-xl font-semibold uppercase">Store</h3>
 			</Link>
 			<div className="w-full h-6 flex justify-between items-center px-4">
-				<div>
-					<button
-						onClick={() => {
-							dispatch(searchBtnToggle());
-						}}
-						className="main-btn"
-					>
-						<BiSearch />
-					</button>
-					<SearchModal />
-				</div>
+				<button
+					onClick={() => {
+						dispatch(searchBtnToggle());
+					}}
+					className="main-btn"
+				>
+					<BiSearch />
+				</button>
+				<SearchModal />
 				<ul className="flex justify-center items-center gap-4">
 					<NavLink link="products" />
 					<NavLink link="categories" />

@@ -41,7 +41,7 @@
 		}
 	}
 	.card {
-		@apply w-[300px] bg-white p-2 border shadow-sm;
+		@apply w-[300px] max-h-[450px] bg-white p-2 border shadow-sm;
 		.product-image {
 			@apply w-[300px] h-[200px] object-cover rounded-xl;
 		}

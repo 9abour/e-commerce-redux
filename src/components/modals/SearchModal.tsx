@@ -9,6 +9,9 @@ import React, { FormEvent, useEffect, useState } from "react";
 import { CgCloseR } from "react-icons/cg";
 import { BiSearch } from "react-icons/bi";
 import Image from "next/image";
+import Link from "next/link";
+import { addToCart, setCartProductsToLS } from "@/redux/slices/cartSlice";
+import { MdAddCircleOutline } from "react-icons/md";
 
 const SearchModal = () => {
 	const [inputValue, setInputValue] = useState<string>("");
@@ -23,9 +26,17 @@ const SearchModal = () => {
 		}
 	};
 
+	useEffect(() => {
+		if (state.modalIsOpen) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "visible";
+		}
+	}, [state.modalIsOpen]);
+
 	if (modalIsOpen) {
 		return (
-			<div className="absolute w-screen h-screen top-0 left-0 bg-gray-500 bg-opacity-95 z-40">
+			<div className="absolute w-full h-full top-0 left-0 bg-gray-500 bg-opacity-95 z-40">
 				<div className="w-full h-full py-8 grid justify-center items-center z-50">
 					<div>
 						<form
@@ -39,7 +50,7 @@ const SearchModal = () => {
 									dispatch(searchBtnToggle());
 								}}
 								type="button"
-								className="block mx-auto mb-3 text-red-300 border border-red-700 bg-red-700 hover:bg-red-800 focus:ring-2 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-1 text-center shadow-red-500 shadow-md transition"
+								className="block mx-auto mb-3 text-white bg-gray-700 hover:bg-gray-800 focus:ring-2 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm p-1 text-center shadow-gray-500 shadow-md transition"
 							>
 								<CgCloseR size={25} />
 							</button>
@@ -50,37 +61,58 @@ const SearchModal = () => {
 									}}
 									type="text"
 									placeholder="Type here"
-									className="input w-full text-white shadow-md"
+									className="input input-bordered w-full text-gray-900 bg-gray-200 shadow-md"
 								/>
 								<button
 									type="submit"
-									className="flex justify-center items-center min-h-[48px] min-w-[48px] mx-auto mb-3 bg-blue-700 hover:bg-blue-800 rounded-lg text-sm text-center text-white shadow-md transition"
+									className="flex justify-center items-center min-h-[48px] min-w-[48px] mx-auto mb-3 bg-gray-700 hover:bg-gray-800 rounded-lg text-sm text-center text-white shadow-md transition"
 								>
 									<BiSearch size={25} />
 								</button>
 							</div>
 						</form>
-						<div className="container mt-4 flex flex-wrap justify-center gap-2">
-							{results.length != 0 ? (
-								results.map(item => (
-									<div key={item.id} className="card">
-										<Image
-											src={item.thumbnail}
-											width={300}
-											height={300}
-											alt={item.title}
-											priority
-											className="product-image"
-										/>
-										<h3 className="title">{item.title}</h3>
-										<p className="description">{item.description}</p>
-										<button className="btn">Details</button>
-									</div>
-								))
-							) : (
-								<h3>no products.</h3>
-							)}
-						</div>
+						{results.length != 0 ? (
+							<div className="container w-screen mt-4 h-[calc(100vh-200px)] grid place-items-center pb-4 overflow-x-hidden overflow-scroll">
+								<div className="flex flex-cols flex-wrap justify-center items-start gap-2 ">
+									{results.map(item => (
+										<div key={item.id} className="card">
+											<Image
+												src={item.thumbnail}
+												width={300}
+												height={300}
+												alt={item.title}
+												priority
+												className="product-image"
+											/>
+											<div className="flex justify-between items-center">
+												<h3 className="title">{item.title}</h3>
+												<span className="price">{item.price}$</span>
+											</div>
+											<p className="description">{item.description}</p>
+											<Link
+												onClick={() => dispatch(searchBtnToggle())}
+												href={`/products/${item.id}`}
+												className="mb-4 text-blue-500"
+											>
+												Details
+											</Link>
+											<button
+												onClick={() => {
+													dispatch(addToCart(item));
+													dispatch(setCartProductsToLS());
+												}}
+												className="btn cart !mt-auto"
+											>
+												<MdAddCircleOutline size={20} />
+												Cart
+											</button>
+										</div>
+									))}
+								</div>
+							</div>
+						) : (
+							<h3 className="text-center">No products to show.</h3>
+						)}
 					</div>
 				</div>
 			</div>
