@@ -1,10 +1,11 @@
 import React from "react";
 import { productType } from "../../types";
 import { MdAddCircleOutline } from "react-icons/md";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { addToCart, setCartProductsToLS } from "@/redux/slices/cartSlice";
 import Link from "next/link";
 import Image from "next/image";
+import { searchBtnToggle } from "@/redux/slices/searchSlice";
 
 interface Props {
 	product: productType;
@@ -14,10 +15,16 @@ const Card = (props: Props) => {
 	const { id, thumbnail, title, price, description } = props.product;
 
 	const dispatch = useAppDispatch();
+	const searchModal = useAppSelector(state => state.searchSlice.modalIsOpen);
 
 	return (
 		<div className="card">
-			<Link href={`products/${id}`}>
+			<Link
+				onClick={() => {
+					searchModal && dispatch(searchBtnToggle());
+				}}
+				href={`products/${id}`}
+			>
 				<Image
 					src={thumbnail}
 					width={300}
