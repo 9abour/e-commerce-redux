@@ -14,6 +14,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { IoMdAddCircle, IoMdRemoveCircle } from "react-icons/io";
 import Loading from "../Loading";
 import Link from "next/link";
+import CartProduct from "./CartProduct";
 
 const Cart = () => {
 	const cartProducts = useAppSelector(state => state.cartSlice.products);
@@ -89,71 +90,7 @@ const Cart = () => {
 								</thead>
 								<tbody>
 									{cartProducts.map(item => (
-										<tr
-											key={item.product.id}
-											className="[&>td]:p-2 [&>th]:p-2 md:[&>td]:p-4"
-										>
-											<td>
-												<div className="flex items-center space-x-3">
-													<div className="relative avatar">
-														<span className="absolute w-6 h-6 font-semibold bg-blue-500 text-white rounded-full flex justify-center items-center overflow-visible z-50 top-[-3px] left-[-3px]">
-															{item.count}
-														</span>
-														<div className="mask mask-squircle w-12 h-12">
-															<img
-																src={item.product.thumbnail}
-																alt="Avatar Tailwind CSS Component"
-															/>
-														</div>
-													</div>
-													<div>
-														<Link
-															href={`/products/${item.product.id}`}
-															className="font-bold w-full text-xs"
-														>
-															{item.product.title}
-														</Link>
-														<div className="text-sm opacity-50">
-															{item.product.brand}
-														</div>
-													</div>
-												</div>
-											</td>
-											<td className="max-w-[12rem] text-ellipsis overflow-hidden hidden md:table-cell">
-												{item.product.description}
-												<br />
-												<span className="badge badge-ghost badge-sm">
-													Apple
-												</span>
-											</td>
-											<td>{item.product.price}$</td>
-											<th>
-												<button
-													onClick={() =>
-														dispatch(incrementItem(item.product.id))
-													}
-													className="btn btn-ghost !min-h-[12px] !h-8 px-1"
-												>
-													<IoMdAddCircle size={20} />
-												</button>
-												<button
-													onClick={() =>
-														dispatch(decrementItem(item.product.id))
-													}
-													className="btn btn-ghost !min-h-[12px] !h-8 px-1"
-												>
-													<IoMdRemoveCircle size={20} />
-												</button>
-												<button
-													onClick={() =>
-														dispatch(removeFromCart(item.product.id))
-													}
-													className="btn btn-ghost !min-h-[12px] !h-8 px-1 ml-3 text-red-500"
-												>
-													<AiFillDelete size={20} />
-												</button>
-											</th>
-										</tr>
+										<CartProduct product={item.product} count={item.count} />
 									))}
 								</tbody>
 							</table>

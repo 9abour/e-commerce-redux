@@ -10,6 +10,7 @@ import { MdAddCircleOutline, MdCheckCircleOutline } from "react-icons/md";
 import { API_URL } from "../../../constants";
 import { addToCart, setCartProductsToLS } from "@/redux/slices/cartSlice";
 import Loading from "../Loading";
+import Card from "../Card";
 
 const Products = () => {
 	const categories = ["all", "tops", "smartphones", "laptops"];
@@ -49,33 +50,7 @@ const Products = () => {
 			<div className="flex flex-wrap justify-center gap-2 py-4">
 				{products.length != 0 ? (
 					products.map((item: productType) => (
-						<div key={item.id} className="card">
-							<Link href={`products/${item.id}`}>
-								<Image
-									src={item.thumbnail}
-									width={300}
-									height={300}
-									alt={item.title}
-									loading="lazy"
-									className="product-image"
-								/>
-							</Link>
-							<div className="flex justify-between items-center">
-								<h3 className="title">{item.title}</h3>
-								<span className="price">{item.price}$</span>
-							</div>
-							<p className="description">{item.description}</p>
-							<button
-								onClick={() => {
-									dispatch(addToCart(item));
-									dispatch(setCartProductsToLS());
-								}}
-								className="btn cart"
-							>
-								<MdAddCircleOutline size={20} />
-								Cart
-							</button>
-						</div>
+						<Card key={item.id} product={item} />
 					))
 				) : (
 					<Loading />

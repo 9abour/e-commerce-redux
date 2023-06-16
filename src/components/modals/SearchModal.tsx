@@ -12,6 +12,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { addToCart, setCartProductsToLS } from "@/redux/slices/cartSlice";
 import { MdAddCircleOutline } from "react-icons/md";
+import Card from "../Card";
 
 const SearchModal = () => {
 	const [inputValue, setInputValue] = useState<string>("");
@@ -75,38 +76,7 @@ const SearchModal = () => {
 							<div className="container w-screen mt-4 h-[calc(100vh-200px)] grid place-items-center pb-4 overflow-x-hidden overflow-scroll">
 								<div className="flex flex-cols flex-wrap justify-center items-start gap-2 ">
 									{results.map(item => (
-										<div key={item.id} className="card">
-											<Image
-												src={item.thumbnail}
-												width={300}
-												height={300}
-												alt={item.title}
-												priority
-												className="product-image"
-											/>
-											<div className="flex justify-between items-center">
-												<h3 className="title">{item.title}</h3>
-												<span className="price">{item.price}$</span>
-											</div>
-											<p className="description">{item.description}</p>
-											<Link
-												onClick={() => dispatch(searchBtnToggle())}
-												href={`/products/${item.id}`}
-												className="mb-4 text-blue-500"
-											>
-												Details
-											</Link>
-											<button
-												onClick={() => {
-													dispatch(addToCart(item));
-													dispatch(setCartProductsToLS());
-												}}
-												className="btn cart !mt-auto"
-											>
-												<MdAddCircleOutline size={20} />
-												Cart
-											</button>
-										</div>
+										<Card key={item.id} product={item} />
 									))}
 								</div>
 							</div>
