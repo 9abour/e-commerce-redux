@@ -16,7 +16,7 @@ const Card = (props: Props) => {
 	const dispatch = useAppDispatch();
 
 	return (
-		<div key={id} className="card">
+		<div className="card">
 			<Link href={`products/${id}`}>
 				<Image
 					src={thumbnail}
@@ -34,7 +34,7 @@ const Card = (props: Props) => {
 			<p className="description">{description}</p>
 			<button
 				onClick={() => {
-					dispatch(addToCart(props));
+					dispatch(addToCart(props.product));
 					dispatch(setCartProductsToLS());
 				}}
 				className="btn cart"

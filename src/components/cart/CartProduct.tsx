@@ -11,20 +11,20 @@ import Link from "next/link";
 import Image from "next/image";
 import { useAppDispatch } from "@/redux/hooks";
 
-interface Props {
+type Props = {
 	product: productType;
 	count: number;
-}
+};
 
 const CartProduct = (props: Props) => {
 	const { count } = props;
-
-	const { id, thumbnail, title, brand, description, price } = props.product;
+	const { id, thumbnail, title, brand, description, price, category } =
+		props.product;
 
 	const dispatch = useAppDispatch();
 
 	return (
-		<tr key={id} className="[&>td]:p-2 [&>th]:p-2 md:[&>td]:p-4">
+		<tr className="[&>td]:p-2 [&>th]:p-2 md:[&>td]:p-4">
 			<td>
 				<div className="flex items-center space-x-3">
 					<div className="relative avatar">
@@ -51,7 +51,7 @@ const CartProduct = (props: Props) => {
 			<td className="max-w-[12rem] text-ellipsis overflow-hidden hidden md:table-cell">
 				{description}
 				<br />
-				<span className="badge badge-ghost badge-sm">Apple</span>
+				<span className="badge badge-ghost badge-sm">{category}</span>
 			</td>
 			<td>{price}$</td>
 			<th>

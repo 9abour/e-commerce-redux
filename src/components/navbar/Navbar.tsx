@@ -6,11 +6,12 @@ import { BiSearch } from "react-icons/bi";
 import { BsCart } from "react-icons/bs";
 import Link from "next/link";
 import SearchModal from "../modals/SearchModal";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { searchBtnToggle } from "@/redux/slices/searchSlice";
 
 const Navbar = () => {
 	const dispatch = useAppDispatch();
+	const cartProducts = useAppSelector(state => state.cartSlice.products);
 
 	return (
 		<nav className="navbar text-gray-900 bg-white flex-col">
@@ -35,8 +36,11 @@ const Navbar = () => {
 					<NavLink link="products" />
 					<NavLink link="categories" />
 				</ul>
-				<Link href="/cart" className="main-btn">
-					<BsCart />
+				<Link href="/cart" className="main-btn relative">
+					<span className="absolute w-4 h-4 top-0 right-0 flex justify-center items-center bg-blue-500 text-white font-semibold rounded-full ">
+						{cartProducts.length}
+					</span>
+					<BsCart size={22} />
 				</Link>
 			</div>
 		</nav>

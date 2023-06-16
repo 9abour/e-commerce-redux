@@ -3,17 +3,12 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
 	clearCart,
-	decrementItem,
-	incrementItem,
-	removeFromCart,
 	setCartProducts,
 	setCartProductsToLS,
 } from "@/redux/slices/cartSlice";
 import React, { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
-import { IoMdAddCircle, IoMdRemoveCircle } from "react-icons/io";
 import Loading from "../Loading";
-import Link from "next/link";
 import CartProduct from "./CartProduct";
 
 const Cart = () => {
@@ -49,6 +44,7 @@ const Cart = () => {
 
 		return Number(total.toFixed(0));
 	};
+
 	const getDiscountPercentage = (): number => {
 		let total = 0;
 
@@ -62,6 +58,8 @@ const Cart = () => {
 
 		return Number(total.toFixed(0));
 	};
+
+	console.log(cartProducts);
 
 	return (
 		<div className="mt-8">
@@ -90,7 +88,11 @@ const Cart = () => {
 								</thead>
 								<tbody>
 									{cartProducts.map(item => (
-										<CartProduct product={item.product} count={item.count} />
+										<CartProduct
+											key={item.product.id}
+											product={item.product}
+											count={item.count}
+										/>
 									))}
 								</tbody>
 							</table>

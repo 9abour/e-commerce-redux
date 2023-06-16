@@ -2,13 +2,9 @@
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { fetchProducts } from "@/redux/slices/fetchProductsSlice";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { productType } from "../../../types";
-import Link from "next/link";
-import { MdAddCircleOutline, MdCheckCircleOutline } from "react-icons/md";
 import { API_URL } from "../../../constants";
-import { addToCart, setCartProductsToLS } from "@/redux/slices/cartSlice";
 import Loading from "../Loading";
 import Card from "../Card";
 
@@ -27,8 +23,6 @@ const Products = () => {
 			dispatch(fetchProducts(`${API_URL}/category/${category}`));
 		}
 	}, [category]);
-
-	console.log(cartProducts);
 
 	return (
 		<div className="container mt-8">
