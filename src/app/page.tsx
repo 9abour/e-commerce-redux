@@ -1,11 +1,13 @@
-import Banner from "@/components/home/Banner";
-import Products from "@/components/home/Products";
+import { lazy } from "react";
+
+const BannerCom = lazy(() => import("@/components/home/Banner"));
+const ProductsCom = lazy(() => import("@/components/home/Products"));
 
 export default function Home() {
 	return (
 		<div className="mx-auto">
-			<Banner />
-			<Products />
+			<BannerCom />
+			<ProductsCom />
 		</div>
 	);
 }

@@ -1,6 +1,9 @@
 import "./globals.scss";
-import Navbar from "@/components/navbar/Navbar";
 import { Providers } from "@/redux/provider";
+import { lazy } from "react";
+import icon from "@/app/favicon.ico";
+
+const NavbarCom = lazy(() => import("@/components/navbar/Navbar"));
 
 export default function RootLayout({
 	children,
@@ -9,9 +12,16 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
+			<head>
+				<link
+					rel="icon"
+					type="image/x-icon"
+					href="https://www.iconarchive.com/download/i99749/sonya/swarm/Shopping.ico"
+				/>
+			</head>
 			<body>
 				<Providers>
-					<Navbar />
+					<NavbarCom />
 					{children}
 				</Providers>
 			</body>

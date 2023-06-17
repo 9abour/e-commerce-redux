@@ -1,8 +1,9 @@
-import Products from "@/components/home/Products";
-import React from "react";
+import React, { lazy } from "react";
+
+const ProductsCom = lazy(() => import("@/components/home/Products"));
 
 const page = () => {
-	return <Products />;
+	return <ProductsCom />;
 };
 
 export default page;
