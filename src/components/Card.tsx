@@ -40,7 +40,7 @@ const Card = (props: Props) => {
 				/>
 			</Link>
 			<div className="flex justify-between items-center">
-				<h3 className="title">{title}</h3>
+				<h4 className="title">{title}</h4>
 				<span className="price">{price}$</span>
 			</div>
 			<p className="description">{description}</p>

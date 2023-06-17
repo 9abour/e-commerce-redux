@@ -13,6 +13,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<head>
+				<title>E-commerce</title>
 				<link
 					rel="icon"
 					type="image/x-icon"
