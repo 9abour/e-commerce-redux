@@ -106,7 +106,9 @@ const Cart = () => {
 								</div>
 								<div className="mt-4">
 									<h3 className="text-xl">Total:</h3>
-									<span className="text-xl">{getCartTotal()}$</span>
+									<span className="text-xl">
+										{getCartTotal() - getDiscountPercentage()}$
+									</span>
 								</div>
 							</div>
 						</div>
