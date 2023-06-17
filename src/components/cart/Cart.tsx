@@ -40,7 +40,6 @@ const Cart = () => {
 		let total = 0;
 
 		cartProducts.map(item => (total += item.count * item.product.price));
-		console.log(cartProducts);
 
 		return Number(total.toFixed(0));
 	};
@@ -58,8 +57,6 @@ const Cart = () => {
 
 		return Number(total.toFixed(0));
 	};
-
-	console.log(cartProducts);
 
 	return (
 		<div className="mt-8">

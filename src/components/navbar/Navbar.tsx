@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavLink from "./NavLink";
 import { SiHomeassistantcommunitystore } from "react-icons/si";
 import { BiSearch } from "react-icons/bi";
@@ -8,10 +8,19 @@ import Link from "next/link";
 import SearchModal from "../modals/SearchModal";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { searchBtnToggle } from "@/redux/slices/searchSlice";
+import { setCartProducts } from "@/redux/slices/cartSlice";
 
 const Navbar = () => {
 	const dispatch = useAppDispatch();
 	const cartProducts = useAppSelector(state => state.cartSlice.products);
+
+	// Load cart products from local storage
+	useEffect(() => {
+		const cartProductsFromLS = localStorage.getItem("cartProducts");
+		if (cartProductsFromLS != null) {
+			dispatch(setCartProducts(JSON.parse(cartProductsFromLS)));
+		}
+	}, []);
 
 	return (
 		<nav className="navbar text-gray-900 bg-white flex-col">

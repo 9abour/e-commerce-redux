@@ -17,6 +17,11 @@ const Card = (props: Props) => {
 	const dispatch = useAppDispatch();
 	const searchModal = useAppSelector(state => state.searchSlice.modalIsOpen);
 
+	const handleAddToCart = () => {
+		dispatch(addToCart(props.product));
+		dispatch(setCartProductsToLS());
+	};
+
 	return (
 		<div className="card">
 			<Link
@@ -41,8 +46,7 @@ const Card = (props: Props) => {
 			<p className="description">{description}</p>
 			<button
 				onClick={() => {
-					dispatch(addToCart(props.product));
-					dispatch(setCartProductsToLS());
+					handleAddToCart();
 				}}
 				className="btn cart"
 			>
