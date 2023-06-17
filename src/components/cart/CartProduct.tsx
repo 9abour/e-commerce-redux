@@ -49,8 +49,7 @@ const CartProduct = (props: Props) => {
 				</div>
 			</td>
 			<td className="max-w-[12rem] text-ellipsis overflow-hidden hidden md:table-cell">
-				{description}
-				<br />
+				<p className="line-clamp-1 mb-3 text-gray-200">{description}</p>
 				<span className="badge badge-ghost badge-sm">{category}</span>
 			</td>
 			<td>{price}$</td>

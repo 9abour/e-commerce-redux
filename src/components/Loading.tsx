@@ -3,9 +3,7 @@ import React from "react";
 const Loading = () => {
 	return (
 		<div className="w-full flex justify-center">
-			<button className="btn loading bg-transparent border-none">
-				loading...
-			</button>
+			<span className="loading loading-spinner text-neutral"></span>
 		</div>
 	);
 };

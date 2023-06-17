@@ -74,7 +74,7 @@ const Cart = () => {
 							</button>
 						</div>
 						<div className="overflow-x-auto px-4">
-							<table className="table w-full">
+							<table className="table bg-[#2a303c] w-full">
 								<thead>
 									<tr>
 										<th>Product</th>
