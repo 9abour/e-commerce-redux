@@ -7,6 +7,7 @@ import { productType } from "../../../types";
 import Link from "next/link";
 import Image from "next/image";
 import { MdAddCircleOutline } from "react-icons/md";
+import Card from "../Card";
 
 const Categories = () => {
 	const categories = [
@@ -59,29 +60,7 @@ const Categories = () => {
 				</select>
 				<div className="flex flex-wrap justify-center gap-2 mt-8">
 					{products.length != 0 ? (
-						products.map((item: productType) => (
-							<div key={item.id} className="card">
-								<Link href={`products/product/${item.id}`}>
-									<Image
-										src={item.thumbnail}
-										width={300}
-										height={300}
-										alt={item.title}
-										loading="lazy"
-										className="product-image"
-									/>
-								</Link>
-								<div className="flex justify-between items-center">
-									<h3 className="title">{item.title}</h3>
-									<span className="price">{item.price}$</span>
-								</div>
-								<p className="description">{item.description}</p>
-								<button className="btn cart">
-									<MdAddCircleOutline size={20} />
-									Cart
-								</button>
-							</div>
-						))
+						products.map((item: productType) => <Card product={item} />)
 					) : (
 						<button className="btn loading bg-transparent border-none">
 							loading...
