@@ -41,7 +41,10 @@ const CartProduct = (props: Props) => {
 						</div>
 					</div>
 					<div>
-						<Link href={`/products/${id}`} className="font-bold w-full text-xs">
+						<Link
+							href={`/products/${id}`}
+							className="font-bold w-full text-xs line-clamp-1"
+						>
 							{title}
 						</Link>
 						<div className="text-sm opacity-50">{brand}</div>
@@ -68,7 +71,7 @@ const CartProduct = (props: Props) => {
 				</button>
 				<button
 					onClick={() => dispatch(removeFromCart(id))}
-					className="btn btn-ghost !min-h-[12px] !h-8 px-1 ml-3 text-red-500"
+					className="btn btn-ghost !min-h-[12px] !h-8 px-1 mdml-3 text-red-500"
 				>
 					<AiFillDelete size={20} />
 				</button>

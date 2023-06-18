@@ -75,7 +75,7 @@ const Cart = () => {
 						</div>
 						<div className="overflow-x-auto px-4">
 							<table className="table bg-[#2a303c] !text-white w-full">
-								<thead>
+								<thead className="!text-white">
 									<tr>
 										<th>Product</th>
 										<th className="hidden md:table-cell">Info</th>
