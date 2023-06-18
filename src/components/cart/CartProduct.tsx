@@ -24,7 +24,7 @@ const CartProduct = (props: Props) => {
 	const dispatch = useAppDispatch();
 
 	return (
-		<tr className="[&>td]:p-2 [&>th]:p-2 md:[&>td]:p-4">
+		<tr className="[&>td]:p-2 [&>th]:p-0 md:[&>td]:p-4">
 			<td>
 				<div className="flex items-center space-x-3">
 					<div className="relative avatar">
@@ -56,26 +56,28 @@ const CartProduct = (props: Props) => {
 				<span className="badge badge-ghost badge-sm">{category}</span>
 			</td>
 			<td>{price}$</td>
-			<th>
-				<button
-					onClick={() => dispatch(incrementItem(id))}
-					className="btn btn-ghost !min-h-[12px] !h-8 px-1"
-				>
-					<IoMdAddCircle size={20} />
-				</button>
-				<button
-					onClick={() => dispatch(decrementItem(id))}
-					className="btn btn-ghost !min-h-[12px] !h-8 px-1"
-				>
-					<IoMdRemoveCircle size={20} />
-				</button>
-				<button
-					onClick={() => dispatch(removeFromCart(id))}
-					className="btn btn-ghost !min-h-[12px] !h-8 px-1 mdml-3 text-red-500"
-				>
-					<AiFillDelete size={20} />
-				</button>
-			</th>
+			<td>
+				<div className="flex justify-end items-center">
+					<button
+						onClick={() => dispatch(incrementItem(id))}
+						className="btn btn-ghost !min-h-[12px] !h-8 px-1"
+					>
+						<IoMdAddCircle size={20} />
+					</button>
+					<button
+						onClick={() => dispatch(decrementItem(id))}
+						className="btn btn-ghost !min-h-[12px] !h-8 px-1"
+					>
+						<IoMdRemoveCircle size={20} />
+					</button>
+					<button
+						onClick={() => dispatch(removeFromCart(id))}
+						className="btn btn-ghost !min-h-[12px] !h-8 px-1 mdml-3 text-red-500"
+					>
+						<AiFillDelete size={20} />
+					</button>
+				</div>
+			</td>
 		</tr>
 	);
 };
